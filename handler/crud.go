@@ -17,7 +17,6 @@ func GetAllEmpoyee(c *gin.Context) {
 	db.Find(&data)
 
 	c.JSON(http.StatusOK, gin.H{"data": data})
-
 	return
 }
 func CreateProduct(c *gin.Context) {
@@ -92,7 +91,7 @@ func DeleteOneProduct(c *gin.Context) {
 	return
 }
 
-func UpdataeProduct(c *gin.Context)  {
+func UpdataeProduct(c *gin.Context) {
 	var s = new(model.Employee)
 	c.BindJSON(&s)
 
@@ -100,19 +99,17 @@ func UpdataeProduct(c *gin.Context)  {
 
 	db := database.DB
 
-	var data model.Employee
+	var data = new(model.Employee)
 
-	db.First(&data, id)
+	db.Find(&data, id)
 
 	data.Names = s.Names
 	data.Username = s.Username
 	data.Email = s.Email
 
-
-
 	db.Save(&data)
 
-	 c.JSON(http.StatusOK , gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"message": "data updated  sucessfull",
 		"data":    data,
 	})
