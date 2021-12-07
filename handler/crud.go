@@ -107,6 +107,14 @@ func UpdataeProduct(c *gin.Context) {
 	data.Username = s.Username
 	data.Email = s.Email
 
+	if s.Names == "" {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "data not found witht this ID",
+		})
+
+	}
+
+	db.Update(&data)
 	db.Save(&data)
 
 	c.JSON(http.StatusOK, gin.H{
